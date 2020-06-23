@@ -46,6 +46,18 @@ function renderTable(parent, arr) {
 }
 
 
+function replacement(arr, cell) {
+	if(cell.empty) {
+		return 
+	}
+	const emptyCell = arr.flat().find(cell => cell.empty);
+	let temp = emptyCell;
+	arr[emptyCell.i][emptyCell.j] = cell;
+	arr[cell.i][cell.j] = emptyCell; 
+}
+
+
+
 
 
 const arr = createArr(3, 3);
@@ -53,4 +65,8 @@ setEmptyCell(arr[0][0]);
 
 console.log(arr[0][0])
 
+
+replacement(arr, arr[0][2]);
 renderTable(document.body, arr);
+
+

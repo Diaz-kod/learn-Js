@@ -42,6 +42,7 @@ function spiralPassage(arr) {
 		up: {i: -1, j: 0},
 		down: {i: 1, j: 0},
 	}
+	// Текущее значение индексов и ячейки
 	let i = 0;
 	let j = 0;
 	let counter = 0;
@@ -59,7 +60,7 @@ function spiralPassage(arr) {
 		// Проверяем следующая ячейка Undefined или нет
 		let nextCell = arr[nextI] && arr[nextI][nextJ];	
 		// Следующая ячейка не граница? И пройдена ли она?
-			arr[i][j].el.style.background = randomColor();
+			arr[i][j].el.style.opacity = 1 - cellTransparency(arr.flat().length, counter); 
 		if (nextCell !== undefined && nextCell.passed == false) {
 			// Делаем следующую ячейку текущей
 			i = nextI;
@@ -94,6 +95,10 @@ function randomColor() {
 }
 
 
+function cellTransparency(length, count) {
+	let opacity = count / length
+	return opacity
+}
 
 
 

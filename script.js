@@ -1,20 +1,30 @@
 // Создание массивов обьектов
-function createArr(row, cell) {
+function createArr(width, height) {
+	// Массив будущих обьектов
 	const arr = []
-	for(let i = 0; i < row; i++) {
+	for(let i = 0; i < width; i++) {
+		// Строка массива тоже массив
 		arr[i] = []
-		for(let j = 0; j < cell; j++) {
+		for(let j = 0; j < height; j++) {
+			// Ячейка массива является обьектом
 			arr[i][j] = {
+				// Пустота
 				empty: false,
+				// Индекс i
 				i: i,
+				// Индекс j
 				j: j,
+				// Порядковый номер ячейки
+				counted: width * i + j,			
 			}
 		}
 	}
+	// Выводим готовый массив
 	return arr
 }
 
 
+// Функция назначения пустой ячейки
 function setEmptyCell(cell) {
 	cell.empty = true
 }
@@ -31,11 +41,19 @@ function renderTable(parent, arr) {
 		table.appendChild(tr);
 		for(let j = 0; j < arr.length; j++) {
 			const td = document.createElement('td');
+			// У всех непустых ячеек класс 'cell'
 			td.classList.add('cell');
-			td.innerHTML = count;
+			// Внутри ячейки порядковый номер
+			// Внутри объекта свойство el: содержит ключ с классом 
 			arr[i][j].el = td;
+			// По клику на ячейку вызывается стрелочная функция
+			td.addEventListener('click', () => {
+				replacement(arr, arr[i][j]);
+			})
+			// Порядковый номер увеличивается после каждой итерации
 			count++
 			tr.appendChild(td)
+			// Обозначение пустой ячейки
 			if(arr[i][j].empty) {
 				td.classList.remove('cell');
 				td.classList.add('null');
@@ -46,27 +64,55 @@ function renderTable(parent, arr) {
 }
 
 
-function replacement(arr, cell) {
+// Функция замены классов и внутренней части обьекта ячеек пустой с непустой
+function reRenderCell(cell) {
 	if(cell.empty) {
-		return 
+		cell.el.classList.remove('null');
+		cell.el.classList.add('cell');
+		cell.empty = false;
+		cell.el.innerHTML = cell.counted
+	} else {
+		cell.el.classList.remove('cell');
+		cell.el.classList.add('null');
+		cell.empty = true;
+		cell.el.innerHTML = 0
 	}
-	const emptyCell = arr.flat().find(cell => cell.empty);
-	let temp = emptyCell;
-	arr[emptyCell.i][emptyCell.j] = cell;
-	arr[cell.i][cell.j] = emptyCell; 
 }
 
 
 
 
+// Функция замены индексов 
+function replacement(arr, cell) {
+	console.log(cell)
+	// Если пустая то выходим
+	if(cell.empty) {
+		return 
+	}
+	// emptyCell - пустая ячейка
+	const emptyCell = arr.flat().find(cell => cell.empty);		
+		// temp - запоминает значение ячейки
+		let temp = emptyCell;
+		// Меняем местами индексы пустой и непустой ячейки
+		[cell.i, cell.j, emptyCell.i, emptyCell.j] = [emptyCell.i, emptyCell.j, cell.i, cell.j];
+		// Пустая ячейка всегда имеет порядковый номер: 0
+		let countCell = cell.counted;
+		cell.counted = emptyCell.counted;
+		emptyCell.counted = countCell;
+	// Переходим к функции по замене классов
+	reRenderCell(cell);
+	reRenderCell(emptyCell);
+}
 
-const arr = createArr(3, 3);
-setEmptyCell(arr[0][0]);
 
-console.log(arr[0][0])
+// Выводим пустую ячейку, создаем таблицу, создаем массив с заданной шириной и высотой 
+// С помощью стрелочной функции засовываем выводы внутрь, чтобы он успевал генерить на экран и выполнять скрипт
+document.addEventListener("DOMContentLoaded", () => {
+	const arr = createArr(3, 3);
+	setEmptyCell(arr[0][0]);
+	renderTable(document.body, arr);
+})
 
 
-replacement(arr, arr[0][2]);
-renderTable(document.body, arr);
 
 

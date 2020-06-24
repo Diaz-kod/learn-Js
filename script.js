@@ -66,16 +66,23 @@ function renderTable(parent, arr) {
 
 // Функция замены классов и внутренней части обьекта ячеек пустой с непустой
 function reRenderCell(cell) {
+	let indexI = cell.i
+	let indexJ = cell.j
 	if(cell.empty) {
 		cell.el.classList.remove('null');
 		cell.el.classList.add('cell');
 		cell.empty = false;
-		cell.el.innerHTML = cell.counted
+		cell.el.innerHTML = cell.counted;
+		cell.i = indexI;
+		cell.j = indexJ;
+		console.log(cell.i, cell.j)
 	} else {
 		cell.el.classList.remove('cell');
 		cell.el.classList.add('null');
 		cell.empty = true;
-		cell.el.innerHTML = 0
+		cell.el.innerHTML = 0;
+		cell.i = 0
+		cell.j = 0
 	}
 }
 
@@ -93,15 +100,18 @@ function replacement(arr, cell) {
 	const emptyCell = arr.flat().find(cell => cell.empty);		
 		// temp - запоминает значение ячейки
 		let temp = emptyCell;
-		// Меняем местами индексы пустой и непустой ячейки
+		// // Меняем местами индексы пустой и непустой ячейки
+		// console.log(cell.i, cell.j, emptyCell.i, emptyCell.j);
 		[cell.i, cell.j, emptyCell.i, emptyCell.j] = [emptyCell.i, emptyCell.j, cell.i, cell.j];
+		// console.log(cell.i, cell.j, emptyCell.i, emptyCell.j);
 		// Пустая ячейка всегда имеет порядковый номер: 0
 		let countCell = cell.counted;
 		cell.counted = emptyCell.counted;
 		emptyCell.counted = countCell;
 	// Переходим к функции по замене классов
-	reRenderCell(cell);
-	reRenderCell(emptyCell);
+	// if(Math.abs(cell.i - emptyCell.i) <= 1 && Math.abs(cell.j - emptyCell.j) <= 1 && Math.abs(cell.i - emptyCell.i) + Math.abs(cell.j - emptyCell.j) <= 1) {	
+		reRenderCell(cell);
+		reRenderCell(emptyCell);
 }
 
 

@@ -1,3 +1,4 @@
+
 // Создание массивов обьектов
 function createArr(width, height) {
 	// Массив будущих обьектов
@@ -60,29 +61,23 @@ function renderTable(parent, arr) {
 			}
 		} 
 	}
-	parent.appendChild(table)
+	parent.appendChild(table);
 }
 
 
 // Функция замены классов и внутренней части обьекта ячеек пустой с непустой
 function reRenderCell(cell) {
-	let indexI = cell.i
-	let indexJ = cell.j
 	if(cell.empty) {
 		cell.el.classList.remove('null');
 		cell.el.classList.add('cell');
-		cell.empty = false;
 		cell.el.innerHTML = cell.counted;
-		cell.i = indexI;
-		cell.j = indexJ;
+		cell.empty = false;
 		console.log(cell.i, cell.j)
 	} else {
 		cell.el.classList.remove('cell');
 		cell.el.classList.add('null');
+		cell.el.innerHTML = cell.counted;
 		cell.empty = true;
-		cell.el.innerHTML = 0;
-		cell.i = 0
-		cell.j = 0
 	}
 }
 
@@ -98,21 +93,33 @@ function replacement(arr, cell) {
 	}
 	// emptyCell - пустая ячейка
 	const emptyCell = arr.flat().find(cell => cell.empty);		
-		// temp - запоминает значение ячейки
-		let temp = emptyCell;
-		// // Меняем местами индексы пустой и непустой ячейки
-		// console.log(cell.i, cell.j, emptyCell.i, emptyCell.j);
-		[cell.i, cell.j, emptyCell.i, emptyCell.j] = [emptyCell.i, emptyCell.j, cell.i, cell.j];
-		// console.log(cell.i, cell.j, emptyCell.i, emptyCell.j);
-		// Пустая ячейка всегда имеет порядковый номер: 0
+	// Переходим к функции по замене классов
+	if(Math.abs(cell.i - emptyCell.i) <= 1 && Math.abs(cell.j - emptyCell.j) <= 1 && Math.abs(cell.i - emptyCell.i) + Math.abs(cell.j - emptyCell.j) <= 1) {	
 		let countCell = cell.counted;
 		cell.counted = emptyCell.counted;
-		emptyCell.counted = countCell;
-	// Переходим к функции по замене классов
-	// if(Math.abs(cell.i - emptyCell.i) <= 1 && Math.abs(cell.j - emptyCell.j) <= 1 && Math.abs(cell.i - emptyCell.i) + Math.abs(cell.j - emptyCell.j) <= 1) {	
+		emptyCell.counted = countCell;		
 		reRenderCell(cell);
 		reRenderCell(emptyCell);
+	}
 }
+
+
+// Функция reset - Обновляет пятнашку и заполняет заново случайными числами ячейки
+// reset.addEventListener( 'click', () => {
+// 	let arr = [1, 2, 3, 4, 5, 6, 7, 8];
+// 	let result = []
+// 	if(arr.length > 0) {
+// 		let num = Math.round(Math.random() * arr.length);
+// 		result.push(num);
+// 		delete arr[num];
+// 	}
+// 	return num
+// });
+
+//  console.log(reset)
+
+
+
 
 
 // Выводим пустую ячейку, создаем таблицу, создаем массив с заданной шириной и высотой 

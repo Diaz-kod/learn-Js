@@ -34,9 +34,14 @@ function setEmptyCell(cell) {
 
 // Генерирование массива в таблицу и вынос на экран
 function renderTable(parent, arr) {
+	const button = document.createElement('button');
+	button.classList.add('but');
+	button.innerHTML = 'Restart'
 	const table = document.createElement('table');
 	table.classList.add('table');
-	let count = 0
+	button.addEventListener('click', () => {
+		restart(arr);
+	})
 	for(let i = 0; i < arr.length; i++) {
 		const tr = document.createElement('tr');
 		table.appendChild(tr);
@@ -51,8 +56,6 @@ function renderTable(parent, arr) {
 			td.addEventListener('click', () => {
 				replacement(arr, arr[i][j]);
 			})
-			// Порядковый номер увеличивается после каждой итерации
-			count++
 			tr.appendChild(td)
 			// Обозначение пустой ячейки
 			if(arr[i][j].empty) {
@@ -62,6 +65,7 @@ function renderTable(parent, arr) {
 		} 
 	}
 	parent.appendChild(table);
+	parent.appendChild(button);
 }
 
 
@@ -103,20 +107,27 @@ function replacement(arr, cell) {
 	}
 }
 
-
-// Функция reset - Обновляет пятнашку и заполняет заново случайными числами ячейки
-// reset.addEventListener( 'click', () => {
-// 	let arr = [1, 2, 3, 4, 5, 6, 7, 8];
-// 	let result = []
-// 	if(arr.length > 0) {
-// 		let num = Math.round(Math.random() * arr.length);
-// 		result.push(num);
-// 		delete arr[num];
-// 	}
-// 	return num
-// });
-
-//  console.log(reset)
+function restart(arr) {
+	const cellLabels = []
+	for(let i = 1; i < arr.flat().length; i++) {
+		cellLabels.push(i);
+	} 
+	cellLabels.sort(() => Math.round(Math.random() * 2 - 1));
+	cellLabels.unshift(0);
+	arr.flat().forEach((cell, i) => {
+		cell.counted = cellLabels[i];
+		cell.el.innerHTML = cell.counted;
+		if(cell.counted == 0) {
+			cell.el.classList.remove('cell');
+			cell.el.classList.add('null');
+			cell.empty = true
+		} else {
+			cell.el.classList.remove('null');
+			cell.el.classList.add('cell');
+			cell.empty = false
+		}
+	})
+}
 
 
 
@@ -125,7 +136,7 @@ function replacement(arr, cell) {
 // Выводим пустую ячейку, создаем таблицу, создаем массив с заданной шириной и высотой 
 // С помощью стрелочной функции засовываем выводы внутрь, чтобы он успевал генерить на экран и выполнять скрипт
 document.addEventListener("DOMContentLoaded", () => {
-	const arr = createArr(3, 3);
+	const arr = createArr(5, 5);
 	setEmptyCell(arr[0][0]);
 	renderTable(document.body, arr);
 })

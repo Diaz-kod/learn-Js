@@ -11,7 +11,7 @@ body {
 }
 
 
-#but {
+.but {
 	margin: 50px;
 	border: 1px solid black;
 	width: 130px;
@@ -22,7 +22,7 @@ body {
 	color: black;
 }
 
-#but:hover {
+.but:hover {
 	cursor: pointer;
 	box-shadow: 0px 0px 1px 1px green;
 }

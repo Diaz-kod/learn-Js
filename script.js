@@ -33,11 +33,15 @@ function createTable(parent, arr) {
 	parent.appendChild(table);
 }
 
+// Функция заполнения
+
+function filling(arr) {
+	arr.flat().forEach(cell => console.log(cell, cell.i, cell.j, cell.value))
+}
 
 
 let arr = createArr(5, 5);
 createTable(document.body, arr);
-
-
+filling(arr)
 
 

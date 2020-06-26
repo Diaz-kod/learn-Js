@@ -19,7 +19,7 @@ function createArr(width, height) {
 				counted: width * i + j,			
 			}
 		}
-	}
+	};
 	// Выводим готовый массив
 	return arr
 }
@@ -52,11 +52,12 @@ function renderTable(parent, arr) {
 			// Внутри ячейки порядковый номер
 			// Внутри объекта свойство el: содержит ключ с классом 
 			arr[i][j].el = td;
+			td.innerHTML = arr[i][j].counted
 			// По клику на ячейку вызывается стрелочная функция
 			td.addEventListener('click', () => {
 				replacement(arr, arr[i][j]);
 			})
-			tr.appendChild(td)
+			tr.appendChild(td);
 			// Обозначение пустой ячейки
 			if(arr[i][j].empty) {
 				td.classList.remove('cell');
@@ -104,8 +105,12 @@ function replacement(arr, cell) {
 		emptyCell.counted = countCell;		
 		reRenderCell(cell);
 		reRenderCell(emptyCell);
+		if(arr.flat().every((cell) => cell.counted == cell.index)) {
+			alert('YOU WINNER');
+		}
 	}
 }
+// Финишная функция прохождения игры
 
 function restart(arr) {
 	const cellLabels = []
@@ -126,21 +131,20 @@ function restart(arr) {
 			cell.el.classList.add('cell');
 			cell.empty = false
 		}
+		cell.index = i;
+		console.log(cell)
 	})
 }
-
-
 
 
 
 // Выводим пустую ячейку, создаем таблицу, создаем массив с заданной шириной и высотой 
 // С помощью стрелочной функции засовываем выводы внутрь, чтобы он успевал генерить на экран и выполнять скрипт
 document.addEventListener("DOMContentLoaded", () => {
-	const arr = createArr(5, 5);
+	const arr = createArr(2, 2);
 	setEmptyCell(arr[0][0]);
 	renderTable(document.body, arr);
 })
-
 
 
 

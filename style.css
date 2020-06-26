@@ -1,0 +1,27 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	background: #5DCA5D;
+	display: flex;
+	justify-content: center;
+}
+
+
+.table {
+	margin-top: 50px;
+}
+
+.td {
+	border: 1px solid black;
+	width: 60px;
+	height: 60px;
+	background-color: #FA9F39;
+	font-size: 25px;
+	text-align: center;
+	padding: 3px;
+}
+
+td:hover {
+	cursor: pointer;
+	box-shadow: 0px 0px 1px 1px red;
+}

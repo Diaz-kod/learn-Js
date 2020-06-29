@@ -8,12 +8,12 @@ function createArr(width, height) {
 					i,
 					j,
 					value: 'empty',
+					counted: width * i + j,
 				}
 			}
 		}
 	return arr
 }
-
 
 // Создаем таблицу поля для игры
 function createTable(parent, arr) {
@@ -24,9 +24,13 @@ function createTable(parent, arr) {
 		tr.classList.add('tr');
 		for(let j = 0; j < arr.length; j++) {
 			const td = document.createElement('td');
-			td.innerHTML = 0;
+			td.innerHTML = '';
+			arr[i][j].el = td;
 			tr.appendChild(td)
-			td.classList.add('td');		
+			td.classList.add('td');	
+			td.addEventListener('click', () => {
+				filling(arr);
+			})	
 		}
 		table.appendChild(tr);
 	}
@@ -36,12 +40,17 @@ function createTable(parent, arr) {
 // Функция заполнения
 
 function filling(arr) {
-	arr.flat().forEach(cell => console.log(cell, cell.i, cell.j, cell.value))
+	let cell = ''
+	for(let i = 0; i < arr.flat().length; i++) {
+		cell = arr.flat()[i].el.classList.add('krest');
+		cell = arr.flat()[i].el.innerHTML = 'X';
+	}
+	return cell
 }
 
 
-let arr = createArr(5, 5);
+let arr = createArr(3, 3 );
 createTable(document.body, arr);
-filling(arr)
+
 
 

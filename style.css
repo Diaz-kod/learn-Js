@@ -44,3 +44,13 @@ td:hover {
 	text-align: center;
 	padding: 3px;	
 }
+
+.zero {
+	border: 1px solid black;
+	width: 60px;
+	height: 60px;
+	background-color: lightyellow;
+	font-size: 35px;
+	text-align: center;
+	padding: 3px;
+}

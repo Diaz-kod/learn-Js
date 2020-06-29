@@ -29,7 +29,7 @@ function createTable(parent, arr) {
 			tr.appendChild(td)
 			td.classList.add('td');	
 			td.addEventListener('click', () => {
-				filling(arr);
+				filling(arr, arr[i][j]);
 			})	
 		}
 		table.appendChild(tr);
@@ -38,18 +38,52 @@ function createTable(parent, arr) {
 }
 
 // Функция заполнения
-
-function filling(arr) {
-	let cell = ''
-	for(let i = 0; i < arr.flat().length; i++) {
-		cell = arr.flat()[i].el.classList.add('krest');
-		cell = arr.flat()[i].el.innerHTML = 'X';
+let move = 0
+function filling(arr, cell) {
+	if(move % 2 === 0) {
+			cell.el.innerHTML = 'X';
+			cell.value = 'Cross';
+			cell.el.classList.add('krest');
+	} else {
+		cell.el.innerHTML = '0';
+		cell.value = 'Zero';
+		cell.el.classList.add('zero');
 	}
-	return cell
+	console.log(move, move % 2)
+	move++
+	checked(arr, cell);
+}
+
+// Функция проверки
+
+function checked(arr, cell) {
+	let classCell = document.getElementsByClassName('td');
+	let moveArr = [
+		// ГОРИЗОНТАЛИ
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+	    // ДИАГОНАЛИ
+		[0, 4, 8],
+		[2, 4, 6],
+		// ВЕРТИКАЛИ
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+	]
+	for(let i = 0; i < moveArr.length; i++) {
+		console.log(classCell[moveArr[i][0]].innerHTML);
+		if(classCell[moveArr[i][0]].innerHTML == 'X' && classCell[moveArr[i][1]].innerHTML == 'X' && classCell[moveArr[i][2]].innerHTML == 'X') {
+			alert('Крестики победили!');
+		} else if(classCell[moveArr[i][0]].innerHTML == '0' && classCell[moveArr[i][1]].innerHTML == '0' && classCell[moveArr[i][2]].innerHTML == '0') {
+			alert('Нолики победили!');
+		}
+	}
 }
 
 
-let arr = createArr(3, 3 );
+
+let arr = createArr(3, 3);
 createTable(document.body, arr);
 
 

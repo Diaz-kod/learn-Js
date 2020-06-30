@@ -38,18 +38,16 @@ function createTable(parent, arr) {
 }
 
 // Функция заполнения
-let move = 0
 function filling(arr, cell) {
-	if(move % 2 === 0) {
+	if(move % 2 === 0 && cell.el.innerHTML !== 'X' && cell.el.innerHTML !== '0') {
 			cell.el.innerHTML = 'X';
-			cell.value = 'Cross';
+			cell.value = 'cross';
 			cell.el.classList.add('krest');
-	} else {
+	} else if(cell.el.innerHTML !== 'X' && cell.el.innerHTML !== '0') {
 		cell.el.innerHTML = '0';
-		cell.value = 'Zero';
+		cell.value = 'zero';
 		cell.el.classList.add('zero');
 	}
-	console.log(move, move % 2)
 	move++
 	checked(arr, cell);
 }
@@ -57,8 +55,9 @@ function filling(arr, cell) {
 // Функция проверки
 
 function checked(arr, cell) {
-	let classCell = document.getElementsByClassName('td');
-	let moveArr = [
+	let allCellPlayGround = Array.from(document.getElementsByClassName('td'));
+	console.log(allCellPlayGround); 
+	const moveArr = [
 		// ГОРИЗОНТАЛИ
 		[0, 1, 2],
 		[3, 4, 5],
@@ -71,18 +70,29 @@ function checked(arr, cell) {
 		[1, 4, 7],
 		[2, 5, 8],
 	]
-	for(let i = 0; i < moveArr.length; i++) {
-		console.log(classCell[moveArr[i][0]].innerHTML);
-		if(classCell[moveArr[i][0]].innerHTML == 'X' && classCell[moveArr[i][1]].innerHTML == 'X' && classCell[moveArr[i][2]].innerHTML == 'X') {
+	const isDraw = allCellPlayGround.every(cell => {
+		return cell.classList == 'td krest' || cell.classList == 'td zero'
+	})
+	if(isDraw) {
+		alert('Ничья')
+		location.reload();
+		return 
+	}
+	for(let i = 0; i < moveArr.length; i++) {	
+		console.log(allCellPlayGround[i].classList)
+		if(allCellPlayGround[moveArr[i][0]].innerHTML == 'X' && allCellPlayGround[moveArr[i][1]].innerHTML == 'X' && allCellPlayGround[moveArr[i][2]].innerHTML == 'X') {
 			alert('Крестики победили!');
-		} else if(classCell[moveArr[i][0]].innerHTML == '0' && classCell[moveArr[i][1]].innerHTML == '0' && classCell[moveArr[i][2]].innerHTML == '0') {
+			location.reload();
+		} else if(allCellPlayGround[moveArr[i][0]].innerHTML == '0' && allCellPlayGround[moveArr[i][1]].innerHTML == '0' && allCellPlayGround[moveArr[i][2]].innerHTML == '0') {
 			alert('Нолики победили!');
-		}
+			location.reload();
+		} 
 	}
 }
 
 
 
+let move = 0
 let arr = createArr(3, 3);
 createTable(document.body, arr);
 

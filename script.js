@@ -56,7 +56,6 @@ function filling(arr, cell) {
 
 function checked(arr, cell) {
 	let allCellPlayGround = Array.from(document.getElementsByClassName('td'));
-	console.log(allCellPlayGround); 
 	const moveArr = [
 		// ГОРИЗОНТАЛИ
 		[0, 1, 2],
@@ -79,7 +78,6 @@ function checked(arr, cell) {
 		return 
 	}
 	for(let i = 0; i < moveArr.length; i++) {	
-		console.log(allCellPlayGround[i].classList)
 		if(allCellPlayGround[moveArr[i][0]].innerHTML == 'X' && allCellPlayGround[moveArr[i][1]].innerHTML == 'X' && allCellPlayGround[moveArr[i][2]].innerHTML == 'X') {
 			alert('Крестики победили!');
 			location.reload();

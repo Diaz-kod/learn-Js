@@ -1,0 +1,183 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+.calendar {
+	background: #232630;
+	width: 340px;
+	height: 630px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-self: flex-start;
+}
+
+.parent-time {
+	height: 100px;
+	width: 550px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.time {
+	font-size: 45px;
+	color: white;
+	font-family: Fira-sans;
+	margin-left: 20px;
+}
+.time:hover {
+	cursor: default;
+}
+.data {
+	font-size: 17px;
+	color: lightblue;
+	font-family: Fira-sans;
+	margin-left: 20px;
+}
+.data:hover {
+	cursor: pointer;
+	color: gray;
+}
+
+.main {
+	width: 340px;
+	margin-top: 10px;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-self: center;
+	padding-bottom: 10px;
+}
+
+.month-year {
+	height: 50px;
+	width: 340px;
+	display: flex;
+	justify-content: flex-start;
+	align-self: center;
+}
+
+.child-month-year {
+	margin-left: 20px;
+	font-size: 20px;
+	color: lightgray;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.child-month-year:hover {
+	color: white;
+	cursor: default;
+}
+
+.parent-dayInTheWeek {
+	display: flex;
+	justify-content: flex-start;
+	align-self: flex-start;
+	margin-left: -21px; 
+}
+
+.dayInTheWeek {
+	display: inline;
+	margin-right: 31px;
+	font-size: 15px;
+	color: lightgray;
+}
+
+.cell {
+	color: white;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	border: 2px solid #232630;
+}
+.cell:hover {
+	border: 2px solid lightgray;
+	cursor: default;
+	background-color: #323746;
+}
+
+.cell-2 {
+	color: #81838A;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	border: 2px solid #232630;	
+}
+
+.cell-2:hover {
+	border: 2px solid lightgray;
+	cursor: default;
+	background-color: #171921;
+}
+
+.cell-3 {
+	color: white;
+	background: #072CFF;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	border: 2px solid black;
+	box-shadow: 0px 0px 0px 2px #072CFF;
+}
+.cell-3:hover {
+	box-shadow: 0px 0px 0px 2px #4B66FF;
+	cursor: default;
+}
+
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-self: flex-start;
+	margin-top: 10px;
+}
+
+.currentCell {
+	margin-left: 15px;
+	font-size: 20px;
+	color: white;
+	width: 340px;
+	height: 30px;
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	justify-content: center;
+}
+
+.event {
+	height: 20px;
+	margin-top: 10px;
+	margin-left: 15px;
+	width: 300px;
+	background: #232630;
+	border: 1px solid lightgray;
+	outline: none;
+	padding: 5px;
+}
+
+.event::placeholder {
+	color: lightgray;
+}
+
+.event:hover {
+	background: #121215;
+}
+
+.event:focus {
+	background: white;
+	color: black;
+}
+
+.currentEvent {
+	margin-left: 15px;
+	margin-top: 15px;
+	font-size: 17px;
+	color: white;
+}

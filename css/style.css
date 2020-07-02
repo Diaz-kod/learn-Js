@@ -1,5 +1,4 @@
 body {
-	font-family: 'RobotoRegular', sans-serif;
 	padding: 0px;
 	margin: 0px;
 }
@@ -62,7 +61,7 @@ body {
 	align-self: center;
 }
 
-.month-year_active {
+.child-month-year {
 	margin-left: 20px;
 	font-size: 20px;
 	color: lightgray;
@@ -71,12 +70,12 @@ body {
 	align-self: center;
 }
 
-.month-year_active:hover {
+.child-month-year:hover {
 	color: white;
 	cursor: default;
 }
 
-.list-dayInTheWeek {
+.parent-dayInTheWeek {
 	display: flex;
 	justify-content: flex-start;
 	align-self: flex-start;
@@ -90,20 +89,20 @@ body {
 	color: lightgray;
 }
 
-.table-calendar_string_emptyCell {
+.cell {
 	color: white;
 	text-align: center;
 	width: 30px;
 	height: 30px;
 	border: 2px solid #232630;
 }
-.table-calendar_string_emptyCell:hover {
+.cell:hover {
 	border: 2px solid lightgray;
 	cursor: default;
 	background-color: #323746;
 }
 
-.table-calendar_string_notUsedCell {
+.cell-2 {
 	color: #81838A;
 	text-align: center;
 	width: 30px;
@@ -111,13 +110,13 @@ body {
 	border: 2px solid #232630;	
 }
 
-.table-calendar_string_notUsedCell:hover {
+.cell-2:hover {
 	border: 2px solid lightgray;
 	cursor: default;
 	background-color: #171921;
 }
 
-.table-calendar_string_activeCell {
+.cell-3 {
 	color: white;
 	background: #072CFF;
 	text-align: center;
@@ -126,13 +125,13 @@ body {
 	border: 2px solid black;
 	box-shadow: 0px 0px 0px 2px #072CFF;
 }
-.table-calendar_string_activeCell:hover {
+.cell-3:hover {
 	box-shadow: 0px 0px 0px 2px #4B66FF;
 	cursor: default;
 }
 
 
-.footer-calendar {
+.footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

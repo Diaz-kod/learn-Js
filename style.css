@@ -25,7 +25,6 @@ body {
 .time {
 	font-size: 45px;
 	color: white;
-	font-family: Fira-sans;
 	margin-left: 20px;
 }
 .time:hover {
@@ -34,7 +33,6 @@ body {
 .data {
 	font-size: 17px;
 	color: lightblue;
-	font-family: Fira-sans;
 	margin-left: 20px;
 }
 .data:hover {
@@ -90,20 +88,25 @@ body {
 	color: lightgray;
 }
 
-.table-calendar_string_emptyCell {
+.table-calendar_cell {
 	color: white;
 	text-align: center;
 	width: 30px;
 	height: 30px;
 	border: 2px solid #232630;
 }
-.table-calendar_string_emptyCell:hover {
+.table-calendar_cell:hover {
 	border: 2px solid lightgray;
 	cursor: default;
 	background-color: #323746;
+
+	transition-property: all;
+	transition-duration: .2s; 
+	transition-delay: .0.5s;
+	transition-timing-function: ease-in-out; 
 }
 
-.table-calendar_string_notUsedCell {
+.table-calendar_cell--not-used {
 	color: #81838A;
 	text-align: center;
 	width: 30px;
@@ -111,13 +114,13 @@ body {
 	border: 2px solid #232630;	
 }
 
-.table-calendar_string_notUsedCell:hover {
+.table-calendar_cell--not-used:hover {
 	border: 2px solid lightgray;
 	cursor: default;
 	background-color: #171921;
 }
 
-.table-calendar_string_activeCell {
+.table-calendar_cell--active {
 	color: white;
 	background: #072CFF;
 	text-align: center;
@@ -126,9 +129,16 @@ body {
 	border: 2px solid black;
 	box-shadow: 0px 0px 0px 2px #072CFF;
 }
-.table-calendar_string_activeCell:hover {
+.table-calendar_cell--active:hover {
+	border: 2px solid black;
 	box-shadow: 0px 0px 0px 2px #4B66FF;
 	cursor: default;
+	background: #072CFF;
+
+	transition-property: all;
+	transition-duration: .2s; 
+	transition-delay: .0.5s;
+	transition-timing-function: ease-in-out; 
 }
 
 
